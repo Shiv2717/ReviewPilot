@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "cursor/**"]
+  pull_request:
+
+jobs:
+  lint-typecheck-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install package
+        run: uv pip install --system -e ".[dev]"
+
+      - name: Ruff
+        run: |
+          ruff check app agents tests
+          ruff format --check app agents tests
+
+      - name: Mypy
+        run: mypy --strict app agents
+
+      - name: Pytest
+        run: pytest -q --cov=app --cov-report=term-missing
+        env:
+          APP_ENV: test
+          GITHUB_WEBHOOK_SECRET: test-webhook-secret
