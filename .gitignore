@@ -18,6 +18,8 @@ coverage.xml
 .env
 *.pem
 !.env.example
+reviewpilot_demo.db
+*.db
 
 # IDE / OS
 .idea/
@@ -28,6 +30,5 @@ coverage.xml
 web/node_modules/
 web/dist/
 
-# Evals artifacts
-evals/report.md
-!evals/.gitkeep
+# Local eval overrides (baseline + report are committed)
+

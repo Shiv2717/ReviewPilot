@@ -4,6 +4,12 @@ on:
   push:
     branches: [main, "cursor/**"]
   pull_request:
+  workflow_dispatch:
+    inputs:
+      real_model:
+        description: "Run evals against the real LLM"
+        type: boolean
+        default: false
 
 jobs:
   lint-typecheck-test:
@@ -24,14 +30,57 @@ jobs:
 
       - name: Ruff
         run: |
-          ruff check app agents tests
-          ruff format --check app agents tests
+          ruff check app agents evals tests
+          ruff format --check app agents evals tests
 
       - name: Mypy
-        run: mypy --strict app agents
+        run: mypy --strict app agents evals
 
       - name: Pytest
-        run: pytest -q --cov=app --cov-report=term-missing
+        run: pytest -q --cov=app --cov=agents --cov-report=term-missing
         env:
           APP_ENV: test
           GITHUB_WEBHOOK_SECRET: test-webhook-secret
+
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install package
+        run: uv pip install --system -e ".[dev]"
+
+      - name: Run evals (FakeLLM)
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.real_model == false }}
+        run: python -m evals.runner
+
+      - name: Run evals (real model)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.real_model == true }}
+        env:
+          LLM_API_BASE: ${{ secrets.LLM_API_BASE }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+        run: python -m evals.runner --real-model
+
+  web-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package.json
+      - run: npm install
+      - run: npm run build

@@ -1,0 +1,27 @@
+{
+  "security": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "fpr": 0.0
+  },
+  "performance": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "fpr": 0.0
+  },
+  "correctness": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "fpr": 0.0
+  },
+  "style": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "fpr": 0.0
+  },
+  "overall": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "fpr": 0.0
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "clean_docs",
+  "agent": "all",
+  "diff": "@@ -1,1 +1,2 @@\n # docs\n+\"\"\"Module docstring.\"\"\"\n",
+  "file_path": "docs.py",
+  "expected": []
+}

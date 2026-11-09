@@ -1,0 +1,7 @@
+{
+  "id": "clean_01",
+  "agent": "all",
+  "diff": "@@ -1,3 +1,3 @@\n def ok_1(x):\n-    return x\n+    return x + 0\n",
+  "file_path": "clean_1.py",
+  "expected": []
+}

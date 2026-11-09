@@ -1,0 +1,14 @@
+{
+  "id": "sec_path",
+  "agent": "security",
+  "diff": "@@ -1,1 +1,2 @@\n def handler():\n+    open('/data/' + filename).read()\n",
+  "file_path": "sec_path.py",
+  "expected": [
+    {
+      "file": "sec_path.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "path_traversal"
+    }
+  ]
+}

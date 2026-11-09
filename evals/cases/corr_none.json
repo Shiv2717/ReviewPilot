@@ -1,0 +1,14 @@
+{
+  "id": "corr_none",
+  "agent": "correctness",
+  "diff": "@@ -1,1 +1,2 @@\n def f():\n+    return user.name.upper()\n",
+  "file_path": "corr_none.py",
+  "expected": [
+    {
+      "file": "corr_none.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "null_safety"
+    }
+  ]
+}

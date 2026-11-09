@@ -1,0 +1,14 @@
+{
+  "id": "style_naming",
+  "agent": "style",
+  "diff": "@@ -1,1 +1,2 @@\n # module\n+def DoStuff(x):\n+    return x\n",
+  "file_path": "style_naming.py",
+  "expected": [
+    {
+      "file": "style_naming.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "naming"
+    }
+  ]
+}

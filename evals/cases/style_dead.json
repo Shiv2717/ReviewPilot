@@ -1,0 +1,14 @@
+{
+  "id": "style_dead",
+  "agent": "style",
+  "diff": "@@ -1,1 +1,2 @@\n # module\n+def unused_helper():\n+    return 42\n",
+  "file_path": "style_dead.py",
+  "expected": [
+    {
+      "file": "style_dead.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "dead_code"
+    }
+  ]
+}

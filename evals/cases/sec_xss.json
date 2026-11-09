@@ -1,0 +1,14 @@
+{
+  "id": "sec_xss",
+  "agent": "security",
+  "diff": "@@ -1,1 +1,2 @@\n def render(name):\n+    return f\"<h1>{name}</h1>\"\n",
+  "file_path": "sec_xss.py",
+  "expected": [
+    {
+      "file": "sec_xss.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "xss"
+    }
+  ]
+}

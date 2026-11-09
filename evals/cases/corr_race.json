@@ -1,0 +1,14 @@
+{
+  "id": "corr_race",
+  "agent": "correctness",
+  "diff": "@@ -1,1 +1,2 @@\n def f():\n+    balance = account.balance\n+    account.balance = balance - amount\n",
+  "file_path": "corr_race.py",
+  "expected": [
+    {
+      "file": "corr_race.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "race"
+    }
+  ]
+}

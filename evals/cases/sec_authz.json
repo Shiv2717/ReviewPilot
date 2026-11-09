@@ -1,0 +1,14 @@
+{
+  "id": "sec_authz",
+  "agent": "security",
+  "diff": "@@ -1,1 +1,2 @@\n def handler():\n+    return db.get_user(request.args['id'])  # no auth check\n",
+  "file_path": "sec_authz.py",
+  "expected": [
+    {
+      "file": "sec_authz.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "authz"
+    }
+  ]
+}

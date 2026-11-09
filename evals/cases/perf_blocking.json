@@ -1,0 +1,14 @@
+{
+  "id": "perf_blocking",
+  "agent": "performance",
+  "diff": "@@ -1,1 +1,3 @@\n def run():\n+async def fetch():\n+    time.sleep(5)\n",
+  "file_path": "perf_blocking.py",
+  "expected": [
+    {
+      "file": "perf_blocking.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "blocking_async"
+    }
+  ]
+}

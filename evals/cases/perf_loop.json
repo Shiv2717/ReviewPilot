@@ -1,0 +1,14 @@
+{
+  "id": "perf_loop",
+  "agent": "performance",
+  "diff": "@@ -1,1 +1,3 @@\n def run():\n+total = 0\n+for i in range(10_000_000):\n+    total += i * i\n",
+  "file_path": "perf_loop.py",
+  "expected": [
+    {
+      "file": "perf_loop.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "wasteful_loop"
+    }
+  ]
+}

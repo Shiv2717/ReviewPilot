@@ -1,0 +1,11 @@
+ignored_paths:
+  - vendor/**
+  - "**/*.generated.ts"
+severity_threshold: low
+enabled_agents:
+  - security
+  - performance
+  - correctness
+  - style
+confidence_threshold: 0.5
+max_comments: 40

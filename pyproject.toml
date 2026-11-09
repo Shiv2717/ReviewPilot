@@ -16,6 +16,9 @@ dependencies = [
     "redis>=5.2.0",
     "structlog>=24.4.0",
     "prometheus-client>=0.21.0",
+    "PyJWT[crypto]>=2.9.0",
+    "PyYAML>=6.0.2",
+    "aiosqlite>=0.20.0",
 ]
 
 [project.optional-dependencies]
@@ -27,20 +30,26 @@ dev = [
     "mypy>=1.13.0",
     "pre-commit>=4.0.0",
     "types-redis>=4.6.0",
+    "types-PyYAML>=6.0.0",
     "httpx>=0.27.0",
 ]
+
+[project.scripts]
+reviewpilot-worker = "app.services.worker:main"
+reviewpilot-replay-dlq = "app.services.dlq:main"
+reviewpilot-eval = "evals.runner:main"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["app", "agents"]
+packages = ["app", "agents", "evals"]
 
 [tool.ruff]
 target-version = "py312"
 line-length = 100
-src = ["app", "agents", "tests"]
+src = ["app", "agents", "evals", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "SIM", "ASYNC"]
@@ -51,7 +60,7 @@ strict = true
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
-packages = ["app", "agents"]
+packages = ["app", "agents", "evals"]
 
 [[tool.mypy.overrides]]
 module = ["redis", "redis.*"]
@@ -64,9 +73,11 @@ testpaths = ["tests"]
 filterwarnings = ["ignore::DeprecationWarning"]
 
 [tool.coverage.run]
-source = ["app"]
+source = ["app", "agents"]
 branch = true
+omit = ["app/services/worker.py"]
 
 [tool.coverage.report]
 show_missing = true
 skip_covered = false
+fail_under = 85

@@ -1,0 +1,14 @@
+{
+  "id": "perf_nplus1",
+  "agent": "performance",
+  "diff": "@@ -1,1 +1,3 @@\n def run():\n+for u in users:\n+        db.query(f'select * from orders where user={u.id}')\n",
+  "file_path": "perf_nplus1.py",
+  "expected": [
+    {
+      "file": "perf_nplus1.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "n_plus_one"
+    }
+  ]
+}

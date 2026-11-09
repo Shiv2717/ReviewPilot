@@ -1,0 +1,14 @@
+{
+  "id": "sec_sql",
+  "agent": "security",
+  "diff": "@@ -1,1 +1,2 @@\n def handler():\n+    query = f\"SELECT * FROM users WHERE id={user_id}\"\n",
+  "file_path": "sec_sql.py",
+  "expected": [
+    {
+      "file": "sec_sql.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "injection"
+    }
+  ]
+}

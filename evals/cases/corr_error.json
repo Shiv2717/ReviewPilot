@@ -1,0 +1,14 @@
+{
+  "id": "corr_error",
+  "agent": "correctness",
+  "diff": "@@ -1,1 +1,2 @@\n def f():\n+    resp = requests.get(url)\n+    return resp.json()\n",
+  "file_path": "corr_error.py",
+  "expected": [
+    {
+      "file": "corr_error.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "error_handling"
+    }
+  ]
+}

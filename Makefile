@@ -1,4 +1,4 @@
-.PHONY: dev test lint typecheck eval migrate pre-commit install
+.PHONY: dev worker test lint typecheck eval migrate pre-commit install ci format load-test
 
 install:
 	uv pip install -e ".[dev]"
@@ -11,18 +11,18 @@ worker:
 	python -m app.services.worker
 
 test:
-	pytest -q --cov=app --cov-report=term-missing
+	pytest -q --cov=app --cov=agents --cov-report=term-missing
 
 lint:
-	ruff check app agents tests
-	ruff format --check app agents tests
+	ruff check app agents evals tests
+	ruff format --check app agents evals tests
 
 format:
-	ruff check --fix app agents tests
-	ruff format app agents tests
+	ruff check --fix app agents evals tests
+	ruff format app agents evals tests
 
 typecheck:
-	mypy --strict app agents
+	mypy --strict app agents evals
 
 eval:
 	python -m evals.runner
@@ -33,4 +33,7 @@ migrate:
 pre-commit:
 	pre-commit run --all-files
 
-ci: lint typecheck test
+load-test:
+	python scripts/load_test.py --count 50
+
+ci: lint typecheck test eval

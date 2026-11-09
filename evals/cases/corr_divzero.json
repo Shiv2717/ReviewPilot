@@ -1,0 +1,14 @@
+{
+  "id": "corr_divzero",
+  "agent": "correctness",
+  "diff": "@@ -1,1 +1,2 @@\n def avg(xs):\n+    return sum(xs)/len(xs)\n",
+  "file_path": "corr_divzero.py",
+  "expected": [
+    {
+      "file": "corr_divzero.py",
+      "line_start": 2,
+      "line_end": 2,
+      "category": "edge_case"
+    }
+  ]
+}

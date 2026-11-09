@@ -10,3 +10,13 @@
   JSON cannot bypass auth; invalid signatures always return 401.
 - **Worker is a stub:** Phase 1 only logs dequeued jobs. Diff fetch and agents arrive in
   Phases 2–3.
+
+## 2026-03-23 — Phases 2–7
+
+- **Token estimate = chars/4:** Good enough for chunk budgeting without a tokenizer dependency.
+- **FakeLLM drives evals in CI:** Deterministic responses from labeled expectations keep
+  CI hermetic; `--real-model` is manual workflow_dispatch only.
+- **Publish idempotency is dual-layer:** In-process set on `ReviewPublisher` plus unique
+  `(owner,repo,number,head_sha)` on `review_runs` for durable retries.
+- **Dashboard talks to `/api`:** Same FastAPI process serves metrics and CRUD; Vite proxies
+  in dev. Theme tokens use CSS variables (light/dark) without a heavy UI kit.
